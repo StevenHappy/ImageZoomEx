@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="videorawtest.example.com.videorawtest.MainActivity">
+
+    <TextView
+        android:id="@+id/qrcode_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Large Text"
+        android:textSize="30dp" />
+    <ImageView
+        android:id="@+id/qrcode_bitmap"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btnPlayVideo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="PlayVideo" />
+    <Button
+        android:id="@+id/btnScan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="扫描二维码" />
+    <Button
+        android:id="@+id/btnGenerate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="生成二维码" />
+
+    <Button
+        android:id="@+id/btnGestureZoom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="GestureZoom" />
+    <Button
+        android:id="@+id/btnPreferen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="PreferenActivity" />
+    <Button
+        android:id="@+id/btnGestureZoomEx"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="GestureZoom" />
+</LinearLayout>
