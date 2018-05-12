@@ -27,12 +27,12 @@
         android:id="@+id/btnScan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="扫描二维码" />
+        android:text="@string/ScanQT" />
     <Button
         android:id="@+id/btnGenerate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="生成二维码" />
+        android:text="@string/GeQT" />
 
     <Button
         android:id="@+id/btnGestureZoom"
@@ -43,7 +43,7 @@
         android:id="@+id/btnPreferen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="PreferenActivity" />
+        android:text="设置语言" />
     <Button
         android:id="@+id/btnGestureZoomEx"
         android:layout_width="match_parent"

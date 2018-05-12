@@ -27,6 +27,12 @@
         <activity android:name=".PreferenceFragmentActivity" />
         <activity android:name=".GestureZoomActivityExActivity" />
         <activity android:name=".GestureDragZoomActivity"></activity>
+        <receiver android:name="com.example.Receiver.ChangeReceiver" >
+            <intent-filter>
+                <action android:name="language" />
+                <action android:name="android.intent.action.LOCALE_CHANGED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

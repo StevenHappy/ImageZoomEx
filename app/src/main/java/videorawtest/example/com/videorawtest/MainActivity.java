@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
@@ -18,9 +20,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Locale;
 
 import androidlibzxing.zxing.activity.CaptureActivity;
 
@@ -172,10 +178,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         Button btnPreferen = (Button) findViewById(R.id.btnPreferen);
         btnPreferen.setOnClickListener(this);
 
-        Button btnGestureZoomEx = (Button)findViewById(R.id.btnGestureZoomEx);
+        Button btnGestureZoomEx = (Button) findViewById(R.id.btnGestureZoomEx);
         btnGestureZoomEx.setOnClickListener(this);
 
-        Button btnGestureDragZoom = (Button)findViewById(R.id.btnGestureDragZoom);
+        Button btnGestureDragZoom = (Button) findViewById(R.id.btnGestureDragZoom);
         btnGestureDragZoom.setOnClickListener(this);
     }
 
@@ -195,23 +201,96 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         }
     }
 
+    int mLanguageId = -1;
+    RadioGroup mGroup;
+
+    void setLanguage() {
+        final String LANGUAGE = "language";
+        final String LANGUAGEGROUP = "language_group";
+        mLanguageId = getSharedPreferences("myShare1", MODE_PRIVATE).getInt(LANGUAGEGROUP, 0);
+
+        View view = getLayoutInflater().inflate(R.layout.language_setting, null);
+        mGroup = (RadioGroup) view.findViewById(R.id.radioGroup1);
+
+        if (mLanguageId != R.id.radioCN && mLanguageId != R.id.radioEN) {
+            Resources res = getResources();
+            Configuration config = res.getConfiguration();
+            if (config.locale == Locale.CHINA)
+                mLanguageId = R.id.radioCN;
+            else //if (config.locale == Locale.ENGLISH)
+                mLanguageId = R.id.radioEN;
+        }
+
+        mGroup.check(mLanguageId);
+        ((RadioButton) mGroup.getChildAt(0)).setText(R.string.chinese);
+        ((RadioButton) mGroup.getChildAt(1)).setText(R.string.english);
+
+        mGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.radioCN) {
+                    mLanguageId = R.id.radioCN;
+                } else if (checkedId == R.id.radioEN) {
+                    mLanguageId = R.id.radioEN;
+                }
+            }
+        });
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                getSharedPreferences("myShare1", MODE_PRIVATE).edit().putInt(LANGUAGE, mLanguageId).commit();
+                Locale mLocale;
+                if (mLanguageId == R.id.radioCN) {
+                    mLocale = Locale.CHINA;
+                } else {
+                    mLocale = Locale.ENGLISH;
+                }
+
+                Resources res = getResources();
+                Configuration config = res.getConfiguration();
+                config.locale = mLocale;
+                DisplayMetrics dm = res.getDisplayMetrics();
+                res.updateConfiguration(config, dm);
+                sendBroadcast(new Intent("language"));//
+                finish();
+            }
+        });
+        builder.setView(view);
+        builder.create().show();
+
+//        Dialog dialog = new Dialog(this);
+//        dialog.setContentView(view, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+//                LinearLayout.LayoutParams.MATCH_PARENT));
+//        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+//            @Override
+//            public void onCancel(DialogInterface dialog) {
+//
+//            }
+//        });
+//        dialog.show();
+
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnGestureZoom:
-                Intent intent = new Intent(this,GestureZoomActivity.class);
+                Intent intent = new Intent(this, GestureZoomActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btnGestureZoomEx:
-                Intent intentZoomEx = new Intent(this,GestureZoomActivityExActivity.class);
+                Intent intentZoomEx = new Intent(this, GestureZoomActivityExActivity.class);
                 startActivity(intentZoomEx);
                 break;
             case R.id.btnPreferen:
-                Intent intentPre = new Intent(this,PreferenceFragmentActivity.class);
-                startActivity(intentPre);
+                setLanguage();
+//                Intent intentPre = new Intent(this,PreferenceFragmentActivity.class);
+//                startActivity(intentPre);
                 break;
-            case  R.id.btnGestureDragZoom:
-                Intent intentDragZoom = new Intent(this,GestureDragZoomActivity.class);
+            case R.id.btnGestureDragZoom:
+                Intent intentDragZoom = new Intent(this, GestureDragZoomActivity.class);
                 startActivity(intentDragZoom);
                 break;
             default:
