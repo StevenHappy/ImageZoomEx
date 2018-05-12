@@ -49,4 +49,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="GestureZoom" />
+    <Button
+        android:id="@+id/btnGestureDragZoom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="GestureDragZoom" />
 </LinearLayout>

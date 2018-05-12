@@ -174,6 +174,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
         Button btnGestureZoomEx = (Button)findViewById(R.id.btnGestureZoomEx);
         btnGestureZoomEx.setOnClickListener(this);
+
+        Button btnGestureDragZoom = (Button)findViewById(R.id.btnGestureDragZoom);
+        btnGestureDragZoom.setOnClickListener(this);
     }
 
 
@@ -206,6 +209,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             case R.id.btnPreferen:
                 Intent intentPre = new Intent(this,PreferenceFragmentActivity.class);
                 startActivity(intentPre);
+                break;
+            case  R.id.btnGestureDragZoom:
+                Intent intentDragZoom = new Intent(this,GestureDragZoomActivity.class);
+                startActivity(intentDragZoom);
                 break;
             default:
                 break;

@@ -25,7 +25,8 @@
         <activity android:name="androidlibzxing.zxing.activity.CaptureActivity" />
         <activity android:name=".GestureZoomActivity" />
         <activity android:name=".PreferenceFragmentActivity" />
-        <activity android:name=".GestureZoomActivityExActivity"></activity>
+        <activity android:name=".GestureZoomActivityExActivity" />
+        <activity android:name=".GestureDragZoomActivity"></activity>
     </application>
 
 </manifest>
